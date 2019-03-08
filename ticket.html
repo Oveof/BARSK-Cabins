@@ -37,6 +37,22 @@
 </html>
 
 <script>
+  class Person {
+    constructor(type, price, days, plusNode, minusNode) {
+      this.type = type;
+      this.price = price;
+      this.days = days;
+      this.plus = plusNode;
+      this.minus = minusNode;
+    }
+    addDay() {
+      this.days++
+    }
+    removeDay() {
+      this.days--
+    }
+  }
+
   var people = document.getElementById('people');
   var total
   var limit = 1500;
@@ -51,18 +67,14 @@
   function addToOrder() {
     var price = this.getAttribute("data-price");
     if(total + price >= limit) {
-      var person = {
-        id: id++,
-        type: this.id,
-        price: price,
-        days: 1 /*TODO: Actually get the amount of days*/
-      }
-      var element = document.createElement('div');
+      var plus = document.createElement('div');
+      var minus = document.createElement('div');
+      var person = new Person(this.id, price, 1, plus, minus);
       order.append(person);
       updateOrder(person);
     }
   }
-  function addDays(node) {
+  function addDays(person) {
 
   }
   function updateOrder() {
