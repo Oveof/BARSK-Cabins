@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <header>
+      <h1></h1>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </header>
+    <div id="main">
+      <div id="wrapper-adult">
+        <button data-price="440" id="adult">Voksen</button>
+      </div>
+      <div id="wrapper-child">
+        <button data-price="280" id="child">Barn</button>
+      </div>
+      <div id="people"></div>
+      <div id="status"></div>
+    </div>
+    <footer>
+
+    </footer>
+  </div>
+</body>
+
+</html>
+
+<script>
+  var people = document.getElementById('people');
+  var total
+  var limit = 1500;
+  var order = [];
+  var id = 0;
+
+  var adult = document.getElementById('adult');
+  var child = document.getElementById('child');
+  adult.addEventListener("click", addToOrder);
+  child.addEventListener("click", addToOrder);
+
+  function addToOrder() {
+    var price = this.getAttribute("data-price");
+    if(total + price >= limit) {
+      var person = {
+        id: id++,
+        type: this.id,
+        price: price,
+        days: 1 /*TODO: Actually get the amount of days*/
+      }
+      var element = document.createElement('div');
+      order.append(person);
+      updateOrder(person);
+    }
+  }
+  function addDays(node) {
+
+  }
+  function updateOrder() {
+
+  }
+
+
+</script>
