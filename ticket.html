@@ -38,12 +38,10 @@
 
 <script>
   class Person {
-    constructor(type, price, days, plusNode, minusNode) {
+    constructor(type, price, days) {
       this.type = type;
       this.price = price;
       this.days = days;
-      this.plus = plusNode;
-      this.minus = minusNode;
     }
     addDay() {
       this.days++
@@ -69,7 +67,7 @@
     if(total + price >= limit) {
       var plus = document.createElement('div');
       var minus = document.createElement('div');
-      var person = new Person(this.id, price, 1, plus, minus);
+      var person = new Person(this.id, price, 1);
       order.append(person);
       updateOrder(person);
     }
