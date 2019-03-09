@@ -69,14 +69,24 @@
       var minus = document.createElement('div');
       var person = new Person(this.id, price, 1);
       order.append(person);
-      updateOrder(person);
+      updateOrder();
     }
   }
   function addDays(person) {
 
   }
   function updateOrder() {
-
+    var tbody = document.createElement('table');
+    tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
+    //For-loop for every row, depending on how many objects in the order array
+    for (let row = 0; row <= order.length; row++) {
+      var tr = document.createElement('tr');
+      for (var property in order) {
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(order[property]));
+      }
+      
+    }
   }
 
 
