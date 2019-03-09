@@ -52,6 +52,7 @@
   }
 
   var people = document.getElementById('people');
+  var orderStatus = document.getElementById('status');
   var total
   var limit = 1500;
   var order = [];
@@ -77,6 +78,7 @@
   }
   function updateOrder() {
     var tbody = document.createElement('table');
+    console.log("Hello THere")
     tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
     //For-loop for every row, depending on how many objects in the order array
     for (let row = 0; row <= order.length; row++) {
@@ -84,9 +86,11 @@
       for (var property in order) {
         var td = document.createElement('td');
         td.appendChild(document.createTextNode(order[property]));
+        tr.appendChild(td);
       }
-      
+      tbody.appendChild(tr)
     }
+    orderStatus.appendChild(tbody);
   }
 
 
