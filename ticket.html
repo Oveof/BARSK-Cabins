@@ -78,19 +78,20 @@
   }
   function updateOrder() {
     var tbody = document.createElement('table');
-    console.log("Hello THere")
     tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
     //For-loop for every row, depending on how many objects in the order array
     for (let row = 0; row <= order.length; row++) {
       var tr = document.createElement('tr');
-      for (var property in order) {
+      for (var property in order[row]) {
         var td = document.createElement('td');
-        td.appendChild(document.createTextNode(order[property]));
+        td.appendChild(document.createTextNode(order[row][property]));
+        console.log(property)
         tr.appendChild(td);
       }
       tbody.appendChild(tr)
     }
     orderStatus.appendChild(tbody);
+    return "done"
   }
 
 
