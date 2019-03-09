@@ -37,49 +37,7 @@
 </html>
 
 <script>
-  class Person {
-    constructor(type, price, days, plusNode, minusNode) {
-      this.type = type;
-      this.price = price;
-      this.days = days;
-      this.plus = plusNode;
-      this.minus = minusNode;
-    }
-    addDay() {
-      this.days++
-    }
-    removeDay() {
-      this.days--
-    }
-  }
 
-  var people = document.getElementById('people');
-  var total
-  var limit = 1500;
-  var order = [];
-  var id = 0;
-
-  var adult = document.getElementById('adult');
-  var child = document.getElementById('child');
-  adult.addEventListener("click", addToOrder);
-  child.addEventListener("click", addToOrder);
-
-  function addToOrder() {
-    var price = this.getAttribute("data-price");
-    if(total + price >= limit) {
-      var plus = document.createElement('div');
-      var minus = document.createElement('div');
-      var person = new Person(this.id, price, 1, plus, minus);
-      order.append(person);
-      updateOrder(person);
-    }
-  }
-  function addDays(person) {
-
-  }
-  function updateOrder() {
-
-  }
 
 
 </script>
