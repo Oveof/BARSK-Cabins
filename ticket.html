@@ -60,18 +60,17 @@
 
   var adult = document.getElementById('adult');
   var child = document.getElementById('child');
-  adult.addEventListener("click", addToOrder);
-  child.addEventListener("click", addToOrder);
+  adult.onclick = addToOrder;
+  child.onclick = addToOrder;
 
   function addToOrder() {
     var price = this.getAttribute("data-price");
-    if(total + price >= limit) {
       var plus = document.createElement('div');
       var minus = document.createElement('div');
-      var person = new Person(this.id, price, 1);
+      person = new Person(this.id, price, 1);
+      console.log(person);
       order.append(person);
       updateOrder();
-    }
   }
   function addDays(person) {
 
@@ -91,7 +90,6 @@
       tbody.appendChild(tr)
     }
     orderStatus.appendChild(tbody);
-    return "done"
   }
 
 
