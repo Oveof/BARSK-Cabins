@@ -42,32 +42,56 @@
       this.type = type;
       this.price = price;
       this.days = days;
+      this.default = price;
+      if (type == "adult") {
+        this.limit = 1500;
+      }
+      if (type == "child") {
+        this.limit = 900;
+      }
     }
     addDay() {
-      var price = (this.price / this.days);
       this.days++;
-      this.price += price
+      this.price += this.default;
+      if (this.price + this.default >= this.limit && this.edgePrice == null) {
+        this.edgePrice = this.price;
+        this.edgeDay = this.days;
+      }
+      if (this.price > this.limit) {
+        this.price = this.limit
+      }
     }
     removeDay() {
-      var price = (this.price / this.days);
       this.days--;
-      this.price -= price;
+      if (this.price != this.limit) {
+        this.price -= this.default;
+      }
+      if (this.edgeDay == this.days && this.edgePrice != null) {
+        this.price = this.edgePrice
+      }
     }
   }
-
+  
   var people = document.getElementById('people');
   var orderStatus = document.getElementById('status');
   var total
-  var limit = 1500;
   var order = [];
   var currentID = 0;
-
-
+  
+  
   var adult = document.getElementById('adult');
   var child = document.getElementById('child');
+  var adultPrice = Number(adult.getAttribute("data-price"));
+  var childPrice = Number(child.getAttribute("data-price"));
   adult.onclick = addToOrder;
   child.onclick = addToOrder;
 
+  var adultArr = [0,0];
+  var childArr = [0];
+  var adultLimit = 1500;
+  var childLimit = 900
+  var current = adultPrice;
+  
   //Function for ordering for a new person, information is stored as an object and passed to the array "order"
   function addToOrder() {
     var price = Number(this.getAttribute("data-price"));
@@ -77,6 +101,8 @@
     addEditor(this.innerHTML);
     updateOrder();
   }
+
+
 
   function editDays() {
     var string = this.parentNode.id
@@ -122,7 +148,6 @@
     minus.addEventListener("click", editDays);
     currentID++
   }
-
   //Update order
   var tbody = document.createElement('table');
   function updateOrder() {
@@ -131,9 +156,11 @@
     for (let row = 0; row <= order.length; row++) {
       var tr = document.createElement('tr');
       for (var property in order[row]) {
-        var td = document.createElement('td');
-        td.appendChild(document.createTextNode(order[row][property]));
-        tr.appendChild(td);
+        if (property == "type" || property == "price" || property == "days") {
+          var td = document.createElement('td');
+          td.appendChild(document.createTextNode(order[row][property]));
+          tr.appendChild(td);
+        }
       }
       tbody.appendChild(tr)
     }
