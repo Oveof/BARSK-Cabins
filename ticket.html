@@ -65,18 +65,19 @@
 
   function addToOrder() {
     var price = this.getAttribute("data-price");
-      var plus = document.createElement('div');
-      var minus = document.createElement('div');
-      person = new Person(this.id, price, 1);
-      console.log(person);
-      order.append(person);
-      updateOrder();
+    var minus = document.createElement('div');
+    var plus = document.createElement('div');
+    person = new Person(this.id, price, 1);
+    order.push(person);
+    console.log(person);
+    updateOrder();
   }
   function addDays(person) {
 
   }
+  var tbody = document.createElement('table');
   function updateOrder() {
-    var tbody = document.createElement('table');
+    tbody.innerHTML = "";
     tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
     //For-loop for every row, depending on how many objects in the order array
     for (let row = 0; row <= order.length; row++) {
