@@ -44,10 +44,14 @@
       this.days = days;
     }
     addDay() {
-      this.days++
+      var price = (this.price / this.days);
+      this.days++;
+      this.price += price
     }
     removeDay() {
-      this.days--
+      var price = (this.price / this.days);
+      this.days--;
+      this.price -= price;
     }
   }
 
@@ -65,15 +69,29 @@
 
   //Function for ordering for a new person, information is stored as an object and passed to the array "order"
   function addToOrder() {
-    var price = this.getAttribute("data-price");
+    var price = Number(this.getAttribute("data-price"));
     person = new Person(this.id, price, 1);
     order.push(person);
     console.log(person);
     addEditor(this.innerHTML);
     updateOrder();
   }
-  function editDays(person) {
-    
+
+  function editDays() {
+    var string = this.parentNode.id
+    string = string.split("-");
+    var id = string[1];
+    if (this.id == "plus") {
+      order[id].addDay();
+    }
+    else {
+      console.log(this.id)
+      order[id].removeDay();
+      if (order[id].days == 0) {
+        order.splice(id, 1);
+      }
+    }
+    updateOrder()
   }
 
   var id = 0;
@@ -89,12 +107,15 @@
     plus.setAttribute("id", "plus")
     minus.setAttribute("id", "minus");
     var div = document.createElement('div')
-    div.innerHTML = `<h6>${type}</h6>`
+    div.innerHTML = `<h4>${type}</h4>`
     var divID = "wrapper-" + id;
     div.setAttribute("id", divID);
     people.appendChild(div);
     div.appendChild(plus);
     div.appendChild(minus);
+
+    plus.addEventListener("click", editDays);
+    minus.addEventListener("click", editDays);
     id++
   }
 
@@ -108,7 +129,6 @@
       for (var property in order[row]) {
         var td = document.createElement('td');
         td.appendChild(document.createTextNode(order[row][property]));
-        console.log(property)
         tr.appendChild(td);
       }
       tbody.appendChild(tr)
