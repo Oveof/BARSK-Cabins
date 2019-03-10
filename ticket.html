@@ -43,6 +43,7 @@
       this.price = price;
       this.days = days;
       this.default = price;
+      this.discount = 0;
       if (type == "adult") {
         this.limit = 1500;
       }
@@ -53,21 +54,32 @@
     addDay() {
       this.days++;
       this.price += this.default;
+      this.realPrice += this.default
       if (this.price + this.default >= this.limit && this.edgePrice == null) {
         this.edgePrice = this.price;
+        this.realPrice = this.edgePrice
         this.edgeDay = this.days;
       }
       if (this.price > this.limit) {
         this.price = this.limit
+        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100)
       }
     }
     removeDay() {
       this.days--;
+      this.realPrice -= this.default
+      console.log(this.realPrice)
       if (this.price != this.limit) {
         this.price -= this.default;
       }
       if (this.edgeDay == this.days && this.edgePrice != null) {
         this.price = this.edgePrice
+      }
+      if (Math.round((this.realPrice - this.limit) / this.realPrice * 100) >= 0) {
+        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100)
+      }
+      else {
+        this.discount = 0;
       }
     }
   }
@@ -151,12 +163,12 @@
   //Update order
   var tbody = document.createElement('table');
   function updateOrder() {
-    tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
+    tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td><td>Avslag</td></tr>"
     //Double for-loop, one for the array of objects, the other for going through the object properties
     for (let row = 0; row <= order.length; row++) {
       var tr = document.createElement('tr');
       for (var property in order[row]) {
-        if (property == "type" || property == "price" || property == "days") {
+        if (property == "type" || property == "price" || property == "days" || property == "discount") {
           var td = document.createElement('td');
           td.appendChild(document.createTextNode(order[row][property]));
           tr.appendChild(td);
