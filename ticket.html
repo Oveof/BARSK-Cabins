@@ -56,30 +56,53 @@
   var total
   var limit = 1500;
   var order = [];
-  var id = 0;
+
 
   var adult = document.getElementById('adult');
   var child = document.getElementById('child');
   adult.onclick = addToOrder;
   child.onclick = addToOrder;
 
+  //Function for ordering for a new person, information is stored as an object and passed to the array "order"
   function addToOrder() {
     var price = this.getAttribute("data-price");
-    var minus = document.createElement('div');
-    var plus = document.createElement('div');
     person = new Person(this.id, price, 1);
     order.push(person);
     console.log(person);
+    addEditor(this.innerHTML);
     updateOrder();
   }
-  function addDays(person) {
-
+  function editDays(person) {
+    
   }
+
+  var id = 0;
+
+  function addEditor(type) {
+    var plus = document.createElement('div');
+    var minus = document.createElement('div');
+    //TODO: Refactor to better fit the style of coding in updateOrder()
+    plus.innerHTML = "+";
+    minus.innerHTML = "-";
+    //var plusID = "plus-" + id;
+    //var minusID = "minus-" + id;
+    plus.setAttribute("id", "plus")
+    minus.setAttribute("id", "minus");
+    var div = document.createElement('div')
+    div.innerHTML = `<h6>${type}</h6>`
+    var divID = "wrapper-" + id;
+    div.setAttribute("id", divID);
+    people.appendChild(div);
+    div.appendChild(plus);
+    div.appendChild(minus);
+    id++
+  }
+
+  //Update order
   var tbody = document.createElement('table');
   function updateOrder() {
-    tbody.innerHTML = "";
     tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td></tr>"
-    //For-loop for every row, depending on how many objects in the order array
+    //Double for-loop, one for the array of objects, the other for going through the object properties
     for (let row = 0; row <= order.length; row++) {
       var tr = document.createElement('tr');
       for (var property in order[row]) {
