@@ -60,6 +60,7 @@
   var total
   var limit = 1500;
   var order = [];
+  var currentID = 0;
 
 
   var adult = document.getElementById('adult');
@@ -71,7 +72,7 @@
   function addToOrder() {
     var price = Number(this.getAttribute("data-price"));
     person = new Person(this.id, price, 1);
-    order.push(person);
+    order[currentID] = person
     console.log(person);
     addEditor(this.innerHTML);
     updateOrder();
@@ -81,20 +82,23 @@
     var string = this.parentNode.id
     string = string.split("-");
     var id = string[1];
-    if (this.id == "plus") {
+    console.log(id)
+    if (this.id == "plus" && order[id].days < 7) {
       order[id].addDay();
     }
-    else {
+    if (this.id == "minus") {
       console.log(this.id)
       order[id].removeDay();
-      if (order[id].days == 0) {
-        order.splice(id, 1);
+      if (order[id].days <= 0) {
+        //order.splice(id, 1);
+        order[id] = null;
+        this.parentNode.parentNode.removeChild(this.parentNode)
+
       }
     }
     updateOrder()
   }
 
-  var id = 0;
 
   function addEditor(type) {
     var plus = document.createElement('div');
@@ -108,7 +112,7 @@
     minus.setAttribute("id", "minus");
     var div = document.createElement('div')
     div.innerHTML = `<h4>${type}</h4>`
-    var divID = "wrapper-" + id;
+    var divID = "wrapper-" + currentID;
     div.setAttribute("id", divID);
     people.appendChild(div);
     div.appendChild(plus);
@@ -116,7 +120,7 @@
 
     plus.addEventListener("click", editDays);
     minus.addEventListener("click", editDays);
-    id++
+    currentID++
   }
 
   //Update order
