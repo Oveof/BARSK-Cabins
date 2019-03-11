@@ -62,7 +62,7 @@
       }
       if (this.price > this.limit) {
         this.price = this.limit
-        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100)
+        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100) + "%"
       }
     }
     removeDay() {
@@ -76,7 +76,7 @@
         this.price = this.edgePrice
       }
       if (Math.round((this.realPrice - this.limit) / this.realPrice * 100) >= 0) {
-        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100)
+        this.discount = Math.round((this.realPrice - this.limit) / this.realPrice * 100) + "%"
       }
       else {
         this.discount = 0;
@@ -144,8 +144,6 @@
     //TODO: Refactor to better fit the style of coding in updateOrder()
     plus.innerHTML = "+";
     minus.innerHTML = "-";
-    //var plusID = "plus-" + id;
-    //var minusID = "minus-" + id;
     plus.setAttribute("id", "plus")
     minus.setAttribute("id", "minus");
     var div = document.createElement('div')
