@@ -19,7 +19,15 @@
       </ul>
     </header>
     <div id="main">
-
+      <div id="menu">
+        <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
+        <map name="cabinmap">
+          <area id="grantoppen" shape="rect" coords="" href="asd" alt="">
+          <area shape="rect" coords="" href="" alt="">
+          <area shape="rect" coords="" href="" alt="">
+          <area shape="rect" coords="" href="" alt="">
+        </map>
+      </div>
     </div>
     <footer>
 
@@ -28,7 +36,6 @@
 </body>
 
 </html>
-
 <script>
 
 </script>
@@ -38,7 +45,7 @@
     {
       name: "Granstua",
       beds: 4,
-      standard: "Høg",
+      standard: "Høy",
       sauna: true,
       price: 12000
     },
@@ -64,4 +71,18 @@
       price: 30000
     }
   ]
+  function offset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+  }
+  var cabins = document.getElementById('cabins');
+  var grantoppen = document.getElementById('grantoppen');
+
+  var mapcoords = offset(cabins)
+  var grantoppenX = 306 + mapcoords.left;
+  var grantoppenY = 493 + mapcoords.top;
+  grantoppen.coords = `(306, 493, 590, 367)`
+  
 </script>
