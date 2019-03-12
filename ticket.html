@@ -43,10 +43,10 @@
       this.days = days;
       this.default = price;
       this.discount = 0;
-      if (type == "adult") {
+      if (type == "Voksen") {
         this.limit = 1500;
       }
-      if (type == "child") {
+      if (type == "Barn") {
         this.limit = 900;
       }
     }
@@ -106,7 +106,7 @@
   //Function for ordering for a new person, information is stored as an object and passed to the array "order"
   function addToOrder() {
     var price = Number(this.getAttribute("data-price"));
-    person = new Person(this.id, price, 1);
+    person = new Person(this.innerHTML, price, 1);
     order[currentID] = person
     console.log(person);
     addEditor(this.innerHTML);
@@ -138,8 +138,8 @@
 
 
   function addEditor(type) {
-    var plus = document.createElement('div');
-    var minus = document.createElement('div');
+    var plus = document.createElement('p');
+    var minus = document.createElement('p');
     //TODO: Refactor to better fit the style of coding in updateOrder() or refacto updateOrder()
     plus.innerHTML = "+";
     minus.innerHTML = "-";
@@ -148,10 +148,11 @@
     var div = document.createElement('div')
     div.innerHTML = `<h4>${type}</h4>`
     var divID = "wrapper-" + currentID;
+    div.setAttribute("class", "editor")
     div.setAttribute("id", divID);
     people.appendChild(div);
-    div.appendChild(plus);
     div.appendChild(minus);
+    div.appendChild(plus);
 
     plus.addEventListener("click", editDays);
     minus.addEventListener("click", editDays);
@@ -160,7 +161,7 @@
   //Update order
   var tbody = document.createElement('table');
   function updateOrder() {
-    tbody.innerHTML = "<tr><td>Type</td><td>Pris</td><td>Dager</td><td>Avslag</td></tr>"
+    tbody.innerHTML = "<tr><th>Type</th><th>Pris</th><th>Dager</th><th>Avslag</th></tr>"
     //Double for-loop, one for the array of objects, the other for going through the object properties
     for (let row = 0; row <= order.length; row++) {
       var tr = document.createElement('tr');

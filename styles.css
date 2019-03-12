@@ -7,10 +7,11 @@ h1,h2,h3,h4,h5,h6 {
     padding: 0;
     margin: 0;
 }
+
 #wrapper {
-    display: grid;
     max-width: 100vw;
     min-height: 100vh;
+    display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: auto 1fr auto;
     grid-gap: 1vh
@@ -22,7 +23,10 @@ header {
 }
 #main {
     grid-column: 2 / 12;
-    grid-row: 2
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto minmax(30vh, 1fr) 1fr
 }
 footer {
     grid-column: 2 / 11;
@@ -50,14 +54,52 @@ header ul li:last-child {
     display: flex;
     justify-content: center;
 }
+
 #adult, #child {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
     background-color: blue;
     color: white;
-    display: block;
+    display: inline-block;
     border: none;
     font-size: 1.5em;
+    height: 1.5em;
     
+}
+
+#buttons {
+    grid-column: 1 / 13;
+    grid-row: 1;
+}
+
+#people {
+    grid-column: 1 / 10;
+    grid-row: 2;
+    float: left
+}
+
+#status {
+    grid-column: 10 / 13;
+    grid-row: 3;
+}
+#status table tbody tr th {
+    padding: 1.2vh;
+}
+#status table tr td {
+    text-align: center;
+}
+
+.editor {
+    display: inline-block;
+    padding: 10px
+}
+.editor p {
+    font-size: 1.2em;
+    cursor: pointer;
+    width: 1.2em;
+    text-align: center;
+    background-color: blue;
+    color: white;
+    float: left;
 }
