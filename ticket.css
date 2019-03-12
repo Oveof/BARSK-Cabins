@@ -1,0 +1,18 @@
+#wrapper-main {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 1.5em 1fr auto;
+}
+
+#buttons {
+    grid-column: 1 / 12;
+    grid-row: 1;
+}
+#people {
+    grid-column: 1 / 10;
+    grid-row: 2;
+}
+#status {
+    grid-column: 11 / 13;
+    grid-row: 3;
+}
