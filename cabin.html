@@ -72,7 +72,22 @@
       price: 30000
     }
   ]
-  var cabins = document.getElementById('cabins');
+  var asd = document.getElementById('cabins');
   var grantoppen = document.getElementById('grantoppen');
+  var granbo = document.getElementById('granbo');
+  var grantoppen = document.getElementById('grantoppen');
+  var granhaug = document.getElementById('granhaug');
+  grantoppen.addEventListener('click', displayCabin);
+  granbo.addEventListener('click', displayCabin);
+  grantoppen.addEventListener('click', displayCabin);
+  granhaug.addEventListener('click', displayCabin);
+
+  function displayCabin() {
+    var id = cabins.find(cabin => cabin.name == this.id)
+    for (var property of cabins[id]) {
+      cabins[property]
+      
+    }
+  }
  
 </script>
