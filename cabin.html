@@ -24,7 +24,7 @@
       <div id="menu">
         <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
         <map name="cabinmap">
-          <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)">
+          <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)" href="">
           <area id="Granbo" shape="rect" coords="(478, 147, 647, 275)">
           <area id="Granstua" shape="rect" coords="(650, 215, 825, 360)">
           <area id="Granhaug" shape="rect" coords="(826, 212, 968 , 326)">
@@ -73,10 +73,10 @@
       price: 30000
     }
   ]
-  var asd = document.getElementById('cabins');
+  var cabinMap = document.getElementById('cabins');
   var grantoppen = document.getElementById('Grantoppen');
   var granbo = document.getElementById('Granbo');
-  var grantoppen = document.getElementById('Grantoppen');
+  var granstua = document.getElementById('Granstua');
   var granhaug = document.getElementById('Granhaug');
   grantoppen.addEventListener('click', displayCabin);
   granbo.addEventListener('click', displayCabin);
@@ -92,5 +92,18 @@
       
     }
   }
+  var mapHeight = cabinMap.height;
+  var mapWidth = cabinMap.width;
+  grantoppen.coords = `(${150/1280*mapWidth}, ${245/720*mapHeight}, ${445/1280*mapWidth}, ${433/720*mapHeight})`
+  granbo.coords = `(${478/1280*mapWidth}, ${147/720*mapHeight}, ${647/1280*mapWidth}, ${275/720*mapHeight})`
+  granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`
+  granhaug.coords = `(${826/1280*mapWidth}, ${212/720*mapHeight}, ${968/1280*mapWidth}, ${326/720*mapHeight})`
+/*
+1280x720* 
+OLD: (150, 245, 445, 433)
+NEW: (11.7%, 34%, 34.8%)
+(650, 215, 825, 360)
+(826, 212, 968 , 326)
+*/
  
 </script>
