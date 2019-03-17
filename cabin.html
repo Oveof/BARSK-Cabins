@@ -23,10 +23,10 @@
       <div id="menu">
         <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
         <map name="cabinmap">
-          <area id="grantoppen" shape="rect" coords="(150, 245, 445, 433)">
-          <area id="granbo" shape="rect" coords="(478, 147, 647, 275)">
-          <area id="granstua" shape="rect" coords="(650, 215, 825, 360)">
-          <area id="granhaug" shape="rect" coords="(826, 212, 968 , 326)">
+          <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)">
+          <area id="Granbo" shape="rect" coords="(478, 147, 647, 275)">
+          <area id="Granstua" shape="rect" coords="(650, 215, 825, 360)">
+          <area id="Granhaug" shape="rect" coords="(826, 212, 968 , 326)">
         </map>
       </div>
     </div>
@@ -73,18 +73,20 @@
     }
   ]
   var asd = document.getElementById('cabins');
-  var grantoppen = document.getElementById('grantoppen');
-  var granbo = document.getElementById('granbo');
-  var grantoppen = document.getElementById('grantoppen');
-  var granhaug = document.getElementById('granhaug');
+  var grantoppen = document.getElementById('Grantoppen');
+  var granbo = document.getElementById('Granbo');
+  var grantoppen = document.getElementById('Grantoppen');
+  var granhaug = document.getElementById('Granhaug');
   grantoppen.addEventListener('click', displayCabin);
   granbo.addEventListener('click', displayCabin);
   grantoppen.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
 
   function displayCabin() {
-    var id = cabins.find(cabin => cabin.name == this.id)
-    for (var property of cabins[id]) {
+    //Arrow function to find the specific index
+    var id = cabins.findIndex(cabin => cabin.name == this.id)
+    console.log()
+    for (var property in cabins[id]) {
       cabins[property]
       
     }
