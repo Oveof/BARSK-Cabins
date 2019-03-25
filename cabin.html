@@ -24,11 +24,19 @@
       <div id="menu">
         <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
         <map name="cabinmap">
-          <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)" href="">
+          <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)">
           <area id="Granbo" shape="rect" coords="(478, 147, 647, 275)">
           <area id="Granstua" shape="rect" coords="(650, 215, 825, 360)">
           <area id="Granhaug" shape="rect" coords="(826, 212, 968 , 326)">
         </map>
+      </div>
+      <div id="display">
+        <table id="displayTable">
+
+        </table>
+      </div>
+      <div id="gallery">
+  
       </div>
     </div>
     <footer>
@@ -57,7 +65,7 @@
       beds: 6,
       standard: "Middels",
       sauna: false,
-      price: 15000
+      price: 15000,
       images: 3
     },
     {
@@ -82,19 +90,40 @@
   var granbo = document.getElementById('Granbo');
   var granstua = document.getElementById('Granstua');
   var granhaug = document.getElementById('Granhaug');
+  var display = document.getElementById('display');
+  var displayTable = document.getElementById('displayTable');
+  var gallery = document.getElementById('gallery');
   grantoppen.addEventListener('click', displayCabin);
   granbo.addEventListener('click', displayCabin);
   grantoppen.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
 
+  function loadImages(name, amount) {
+    var imageName = name;
+    for (let i = 0; i < amount; i++) {
+      imageName += i + ".jpg";
+      var img = document.createElement('img')
+      img.href = imageName;
+      gallery.appendChild(img);
+    }
+  }
+
   function displayCabin() {
     //Arrow function to find the specific index
-    var id = cabins.findIndex(cabin => cabin.name == this.id)
-    console.log()
+    display.innerHTML = "";
+    var id = cabins.findIndex(cabin => cabin.name == this.id);
+    displayTable.innerHTML = `<tr><th>Hyttenavn</th><th>Senger</th><th>Standard</th><th>Sauna</th><th>Pris</th></tr>`
+    displayTable.innerHTML += "<tr>"
     for (var property in cabins[id]) {
-      cabins[property]
+      displayTable.innerHTML += `<td>${cabins[id][property]}</td>`
+      
       
     }
+
+    loadImages(cabins[id].name, cabins[id].images);
+
+    displayTable.innerHTML += "</tr>"
+    display.scrollIntoView();
   }
   var mapHeight = cabinMap.height;
   var mapWidth = cabinMap.width;
@@ -102,6 +131,5 @@
   granbo.coords = `(${478/1280*mapWidth}, ${147/720*mapHeight}, ${647/1280*mapWidth}, ${275/720*mapHeight})`
   granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`
   granhaug.coords = `(${826/1280*mapWidth}, ${212/720*mapHeight}, ${968/1280*mapWidth}, ${326/720*mapHeight})`
-
  
 </script>
