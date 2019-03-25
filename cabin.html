@@ -56,7 +56,7 @@
       name: "Granstua",
       beds: 4,
       standard: "Høy",
-      sauna: true,
+      sauna: 'Ja',
       price: 12000,
       images: 3
     },
@@ -64,7 +64,7 @@
       name: "Granbo",
       beds: 6,
       standard: "Middels",
-      sauna: false,
+      sauna: 'Nei',
       price: 15000,
       images: 3
     },
@@ -72,7 +72,7 @@
       name: "Grantoppen",
       beds: 8,
       standard: "Lav",
-      sauna: false,
+      sauna: 'Nei',
       price: 16000,
       images: 3
     },
@@ -80,7 +80,7 @@
       name: "Granhaug",
       beds: 10,
       standard: "Høy",
-      sauna: true,
+      sauna: 'Ja',
       price: 30000,
       images: 3
     }
@@ -95,16 +95,18 @@
   var gallery = document.getElementById('gallery');
   grantoppen.addEventListener('click', displayCabin);
   granbo.addEventListener('click', displayCabin);
-  grantoppen.addEventListener('click', displayCabin);
+  granstua.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
 
   function loadImages(name, amount) {
+    gallery.innerHTML = "";
     var imageName = name;
-    for (let i = 0; i < amount; i++) {
-      imageName += i + ".jpg";
+    for (let i = 1; i < amount + 1; i++) {
+      imageName += i;
       var img = document.createElement('img')
-      img.href = imageName;
+      img.src = `src/${imageName}.jpg`;
       gallery.appendChild(img);
+      imageName = name;
     }
   }
 
@@ -112,17 +114,21 @@
     //Arrow function to find the specific index
     display.innerHTML = "";
     var id = cabins.findIndex(cabin => cabin.name == this.id);
-    displayTable.innerHTML = `<tr><th>Hyttenavn</th><th>Senger</th><th>Standard</th><th>Sauna</th><th>Pris</th></tr>`
-    displayTable.innerHTML += "<tr>"
+    var tbody = document.createElement('table');
+    var tr = document.createElement('tr');
+    tbody.innerHTML = '<tr><th>Hyttenavn</th><th>Senger</th><th>Standard</th><th>Sauna</th><th>Pris</th></tr>'
+    tr = document.createElement('tr');
     for (var property in cabins[id]) {
-      displayTable.innerHTML += `<td>${cabins[id][property]}</td>`
-      
-      
+      if (property != 'images') {
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(`${cabins[id][property]}`))
+        tr.appendChild(td);
+      }
     }
-
+    tbody.appendChild(tr);
+    display.appendChild(tbody); 
     loadImages(cabins[id].name, cabins[id].images);
 
-    displayTable.innerHTML += "</tr>"
     display.scrollIntoView();
   }
   var mapHeight = cabinMap.height;
