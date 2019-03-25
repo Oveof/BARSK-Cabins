@@ -73,3 +73,34 @@ body {
         max-width: 100%;
     }
 }
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1vh;
+}
+
+table, th, td {
+    border: 1px solid grey;
+    text-align: center;
+}
+th {
+    height: 6vh;
+}
+td {
+    height: 4vh;
+}
+
+#gallery {
+    display: flex;
+    justify-content: center;
+}
+.galleryImage {
+    margin: 0.5vh;
+}
+
+
+.galleryImage:hover {
+    opacity: 0,5;
+}

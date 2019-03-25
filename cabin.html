@@ -38,7 +38,6 @@
       <div id="gallery">
   
       </div>
-    </div>
     <footer>
 
     </footer>
@@ -98,15 +97,31 @@
   granstua.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
 
+  var liveGallery = [];
+  function test() {
+
+  }
+
   function loadImages(name, amount) {
+    //remove previous event listeners
+    for (let i = 0; i < liveGallery.length; i++) {
+      liveGallery[i].removeEventListener('click', test);
+    }
+    liveGallery.splice(0, amount);
     gallery.innerHTML = "";
     var imageName = name;
     for (let i = 1; i < amount + 1; i++) {
       imageName += i;
       var img = document.createElement('img')
       img.src = `src/${imageName}.jpg`;
+      img.className = 'galleryImage'
       gallery.appendChild(img);
       imageName = name;
+      liveGallery.push(img);
+      //adding event listener to all of the images in the gallery
+      for (let i = 0; i < liveGallery.length; i++) { 
+        liveGallery[i].addEventListener('click', test);
+      }
     }
   }
 
@@ -128,9 +143,15 @@
     tbody.appendChild(tr);
     display.appendChild(tbody); 
     loadImages(cabins[id].name, cabins[id].images);
-
-    display.scrollIntoView();
+    setTimeout(function() {
+      gallery.scrollIntoView();
+    }, 50) //6ms at minimum, a bit more for slower machines
   }
+
+  //Gallery functionality
+  
+
+  //
   var mapHeight = cabinMap.height;
   var mapWidth = cabinMap.width;
   grantoppen.coords = `(${150/1280*mapWidth}, ${245/720*mapHeight}, ${445/1280*mapWidth}, ${433/720*mapHeight})`
