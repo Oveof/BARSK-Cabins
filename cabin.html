@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>BARSK hytter</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cabin.css">
+  <title>BARSK Hytter</title>
 </head>
 
 <body>
@@ -31,9 +31,6 @@
         </map>
       </div>
       <div id="display">
-        <table id="displayTable">
-
-        </table>
       </div>
       <div id="gallery">
   
@@ -45,43 +42,41 @@
 </body>
 
 </html>
-<script>
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
 <script>
   var cabins = [
     {
-      name: "Granstua",
-      beds: 4,
-      standard: "Høy",
-      sauna: 'Ja',
-      price: 12000,
-      images: 3
+      "name": "Granstua",
+      "beds": 4,
+      "standard": "Høy",
+      "sauna": 'Ja',
+      "price": 12000,
+      "images": 3
     },
     {
-      name: "Granbo",
-      beds: 6,
-      standard: "Middels",
-      sauna: 'Nei',
-      price: 15000,
-      images: 3
+      "name": "Granbo",
+      "beds": 6,
+      "standard": "Middels",
+      "sauna": 'Nei',
+      "price": 15000,
+      "images": 3
     },
     {
-      name: "Grantoppen",
-      beds: 8,
-      standard: "Lav",
-      sauna: 'Nei',
-      price: 16000,
-      images: 3
+      "name": "Grantoppen",
+      "beds": 8,
+      "standard": "Lav",
+      "sauna": 'Nei',
+      "price": 16000,
+      "images": 3
     },
     {
-      name: "Granhaug",
-      beds: 10,
-      standard: "Høy",
-      sauna: 'Ja',
-      price: 30000,
-      images: 3
+      "name": "Granhaug",
+      "beds": 10,
+      "standard": "Høy",
+      "sauna": 'Ja',
+      "price": 30000,
+      "images": 3
     }
   ]
   var cabinMap = document.getElementById('cabins');
@@ -96,16 +91,39 @@
   granbo.addEventListener('click', displayCabin);
   granstua.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
+  
+  var selectOpen = false;
 
-  var liveGallery = [];
-  function test() {
+  function selectImage() {
+    var xprevious = this.left;
+    var yprevious = this.top;
+    console.log("hallo");
+    this.style.position = "absolute";
+    if (!selectOpen) {
+      var xpos = (window.innerWidth - this.width) / 2;
+      var ypos = (window.innerHeight - this.height) / 2;
+
+      this.style.top = ypos + "px";
+      this.style.left = xpos + "px";
+      this.style.opacity = 1;
+      selectOpen = true;
+      return 0;
+      //console.log(select)
+    }
+    if (selectOpen) {
+      this.style.position = "relative";
+      this.style.opacity = 0.95;
+      selectOpen = false;
+    }
 
   }
+
+  var liveGallery = [];
 
   function loadImages(name, amount) {
     //remove previous event listeners
     for (let i = 0; i < liveGallery.length; i++) {
-      liveGallery[i].removeEventListener('click', test);
+      liveGallery[i].removeEventListener('click', selectImage);
     }
     liveGallery.splice(0, amount);
     gallery.innerHTML = "";
@@ -119,9 +137,10 @@
       imageName = name;
       liveGallery.push(img);
       //adding event listener to all of the images in the gallery
-      for (let i = 0; i < liveGallery.length; i++) { 
-        liveGallery[i].addEventListener('click', test);
-      }
+    }
+    TweenMax.staggerTo(".galleryImage", 1, {opacity: 0.95}, 0.2)
+    for (let i = 0; i < liveGallery.length; i++) { 
+      liveGallery[i].addEventListener('click', selectImage);
     }
   }
 
