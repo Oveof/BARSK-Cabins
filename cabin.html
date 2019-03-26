@@ -97,22 +97,24 @@
   function selectImage() {
     var xprevious = this.left;
     var yprevious = this.top;
-    console.log("hallo");
-    this.style.position = "absolute";
+
     if (!selectOpen) {
+      picture = this.cloneNode(true);
+      picture.addEventListener('click', selectImage);
+      gallery.appendChild(picture);
+      picture.style.position = "absolute";
       var xpos = (window.innerWidth - this.width) / 2;
       var ypos = (window.innerHeight - this.height) / 2;
 
-      this.style.top = ypos + "px";
-      this.style.left = xpos + "px";
-      this.style.opacity = 1;
+      picture.style.top = ypos + "px";
+      picture.style.left = xpos + "px";
+      picture.style.opacity = 1;
       selectOpen = true;
       return 0;
-      //console.log(select)
     }
     if (selectOpen) {
-      this.style.position = "relative";
-      this.style.opacity = 0.95;
+      console.log(picture)
+      gallery.removeChild(picture);
       selectOpen = false;
     }
 
