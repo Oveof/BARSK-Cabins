@@ -22,7 +22,9 @@
   </header>
     <div id="main">
       <div id="menu">
-        <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
+        <div id="map">
+          <img id="cabins" src="src/menybilde.jpg" usemap="#cabinmap" alt="">
+        </div>
         <map name="cabinmap">
           <area id="Grantoppen" shape="rect" coords="(150, 245, 445, 433)">
           <area id="Granbo" shape="rect" coords="(478, 147, 647, 275)">
@@ -87,18 +89,22 @@
   var display = document.getElementById('display');
   var displayTable = document.getElementById('displayTable');
   var gallery = document.getElementById('gallery');
+  var wrapper = document.getElementById('wrapper');
   grantoppen.addEventListener('click', displayCabin);
   granbo.addEventListener('click', displayCabin);
   granstua.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
+
   
   var selectOpen = false;
+  var currentDisplay;
 
   function selectImage() {
     var xprevious = this.left;
     var yprevious = this.top;
 
     if (!selectOpen) {
+      cabinMap.style.opacity = 0.5;
       picture = this.cloneNode(true);
       picture.addEventListener('click', selectImage);
       gallery.appendChild(picture);
@@ -108,12 +114,20 @@
 
       picture.style.top = ypos + "px";
       picture.style.left = xpos + "px";
-      picture.style.opacity = 1;
+      TweenMax.to(picture, 1, {scale: 3}, 0.5)
+      picture.style.opacity = 1.0;
       selectOpen = true;
+      currentDisplay = this.name;
+      return 0;
+    }
+    if(selectOpen && currentDisplay != this.name) {
+      gallery.removeChild(picture);
+      selectOpen = false;
+      selectImage();
       return 0;
     }
     if (selectOpen) {
-      console.log(picture)
+      cabinMap.style.opacity = 1;
       gallery.removeChild(picture);
       selectOpen = false;
     }
@@ -175,9 +189,9 @@
   //
   var mapHeight = cabinMap.height;
   var mapWidth = cabinMap.width;
-  grantoppen.coords = `(${150/1280*mapWidth}, ${245/720*mapHeight}, ${445/1280*mapWidth}, ${433/720*mapHeight})`
-  granbo.coords = `(${478/1280*mapWidth}, ${147/720*mapHeight}, ${647/1280*mapWidth}, ${275/720*mapHeight})`
-  granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`
-  granhaug.coords = `(${826/1280*mapWidth}, ${212/720*mapHeight}, ${968/1280*mapWidth}, ${326/720*mapHeight})`
+  grantoppen.coords = `(${150/1280*mapWidth}, ${245/720*mapHeight}, ${445/1280*mapWidth}, ${433/720*mapHeight})`;2.
+  granbo.coords = `(${478/1280*mapWidth}, ${147/720*mapHeight}, ${647/1280*mapWidth}, ${275/720*mapHeight})`;
+  granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`;
+  granhaug.coords = `(${826/1280*mapWidth}, ${212/720*mapHeight}, ${968/1280*mapWidth}, ${326/720*mapHeight})`;
  
 </script>

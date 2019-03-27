@@ -3,6 +3,9 @@
     max-width: 100%;
     height: auto;
 }
+#map {
+    background-color: black;
+}
 
 table {
   border-collapse: collapse;
