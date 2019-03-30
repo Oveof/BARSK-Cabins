@@ -54,7 +54,10 @@
       "standard": "Høy",
       "sauna": 'Ja',
       "price": 12000,
-      "images": 3
+      "images": 3,
+      "occupation": [
+
+      ]
     },
     {
       "name": "Granbo",
@@ -81,6 +84,24 @@
       "images": 3
     }
   ]
+  var occupation = [
+    {
+      time: "Påske 2019",
+      free: ["Granbo"]
+    },
+    {
+      time: "Pinse 2019",
+      free: ["Granstua", "Granbo", "Granhaug"]
+    },
+    {
+      time: "Veke 28",
+      free: ["Granstua", "Granbo", "Grantoppen", "Granhaug"]
+    },
+    {
+      time: "Veke 29",
+      free: ["Granbo", "Grantoppen"]
+    }
+    ];
   var cabinMap = document.getElementById('cabins');
   var grantoppen = document.getElementById('Grantoppen');
   var granbo = document.getElementById('Granbo');
@@ -99,31 +120,35 @@
   var selectOpen = false;
   var currentDisplay;
 
+  function openImage(node) {
+    cabinMap.style.opacity = 0.5;
+    picture = node.cloneNode(true);
+    console.log(picture)
+    picture.addEventListener('click', selectImage);
+    gallery.appendChild(picture);
+    picture.style.position = "absolute";
+    var xpos = (window.innerWidth - node.width) / 2;
+    var ypos = (window.innerHeight - node.height) / 2;
+
+    picture.style.top = ypos + "px";
+    picture.style.left = xpos + "px";
+    TweenMax.to(picture, 1, {scale: 2}, 0.5)
+    currentDisplay = node.id;
+    return 0;
+  }
+
   function selectImage() {
-    var xprevious = this.left;
-    var yprevious = this.top;
-
     if (!selectOpen) {
-      cabinMap.style.opacity = 0.5;
-      picture = this.cloneNode(true);
-      picture.addEventListener('click', selectImage);
-      gallery.appendChild(picture);
-      picture.style.position = "absolute";
-      var xpos = (window.innerWidth - this.width) / 2;
-      var ypos = (window.innerHeight - this.height) / 2;
-
-      picture.style.top = ypos + "px";
-      picture.style.left = xpos + "px";
-      TweenMax.to(picture, 1, {scale: 3}, 0.5)
+      openImage(this);
       picture.style.opacity = 1.0;
       selectOpen = true;
-      currentDisplay = this.name;
       return 0;
     }
-    if(selectOpen && currentDisplay != this.name) {
+    if(selectOpen && currentDisplay != this.id) {
+      console.log("hallo")
       gallery.removeChild(picture);
       selectOpen = false;
-      selectImage();
+      openImage(this);
       return 0;
     }
     if (selectOpen) {
@@ -131,7 +156,6 @@
       gallery.removeChild(picture);
       selectOpen = false;
     }
-
   }
 
   var liveGallery = [];
@@ -145,8 +169,9 @@
     gallery.innerHTML = "";
     var imageName = name;
     for (let i = 1; i < amount + 1; i++) {
+      var img = document.createElement('img');
+      img.id = imageName;
       imageName += i;
-      var img = document.createElement('img')
       img.src = `src/${imageName}.jpg`;
       img.className = 'galleryImage'
       gallery.appendChild(img);
@@ -171,7 +196,7 @@
     for (var property in cabins[id]) {
       if (property != 'images') {
         var td = document.createElement('td');
-        td.appendChild(document.createTextNode(`${cabins[id][property]}`))
+        td.appendChild(document.createTextNode(`${cabins[id][property]}`));
         tr.appendChild(td);
       }
     }
