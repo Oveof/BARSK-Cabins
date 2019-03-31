@@ -18,6 +18,7 @@
       <li><a href="index.html">Hjem</a></li>
       <li><a href="ticket.html">Heiskort</a></li>
       <li><a href="cabin.html">Hytter</a></li>
+      <li><a href="order.html">Bestill hytte</a></li>
     </ul>
   </header>
     <div id="main">
@@ -28,6 +29,7 @@
         <option value="Veke 28">Veke 28</option>
         <option value="Veke 29">Veke 29</option>
       </select>
+      
       <div id="display">
 
       </div>
@@ -46,30 +48,39 @@
   var main = document.getElementById('main');
   var display = document.getElementById('display');
   var selected = seasons.childNodes[1].value;
-  var firstOpen = true;
+
+  function order() {
+    var name = this.id;
+    var freeId = occupation[id].free.findIndex(cabin => cabin == name)
+    occupation[id].free.splice(freeId, 1);
+    update();
+
+  }
   
   function update() {
-    if(firstOpen) {
-      firstOpen = false;
-      return 0;
-    }
     display.innerHTML = "";
-
-    var id = occupation.findIndex(period => period.time == seasons.value);
-    for (let i = 0; i < occupation[id].free.length; i++) {
-      var div = document.createElement('div');
-      var img = document.createElement('img');
-      var h3 = document.createElement('h3');
-      var btn = document.createElement('button');
-      h3.innerHTML = occupation[id].free[i];
-      button.addEventListener('click', )
-      img.src = `src/${occupation[id].free[i]}.jpg`;
-      div.appendChild(h3);
-      div.appendChild(img);
-      display.appendChild(div);
+    id = occupation.findIndex(period => period.time == seasons.value);
+    if(id != null && occupation[id].free.length != 0) {
+      for (let i = 0; i < occupation[id].free.length; i++) {
+        var div = document.createElement('div');
+        var img = document.createElement('img');
+        var h3 = document.createElement('h3');
+        var btn = document.createElement('button');
+        h3.innerHTML = occupation[id].free[i];
+        btn.id = occupation[id].free[i];
+        btn.innerHTML = `Bestill ${btn.id} i denne perioden`
+        btn.addEventListener('click', order);
+        img.src = `src/${occupation[id].free[i]}.jpg`;
+        div.appendChild(h3);
+        div.appendChild(img);
+        div.appendChild(btn);
+        display.appendChild(div);
+      }
+    }
+    else {
+      alert("Ingen ledige hytter");      
     }
   }
-  update();
 
   seasons.onchange = update;
 </script>

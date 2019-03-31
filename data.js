@@ -6,9 +6,6 @@ var cabins = [
         "sauna": 'Ja',
         "price": 12000,
         "images": 3,
-        "occupation": [
-
-        ]
     },
     {
         "name": "Granbo",
