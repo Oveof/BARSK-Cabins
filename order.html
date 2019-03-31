@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="order.css">
+  <title>BARSK Utleie</title>
+</head>
+
+<body>
+  <div id="wrapper">
+  <header>
+    <h1>BARSK</h1>
+    <ul>
+      <li><a href="index.html">Hjem</a></li>
+      <li><a href="ticket.html">Heiskort</a></li>
+      <li><a href="cabin.html">Hytter</a></li>
+    </ul>
+  </header>
+    <div id="main">
+      <select id="seasons">
+        <option selected="selected" disabled>Velg tidsperiode</option>
+        <option value="Påske 2019">Påske 2019</option>
+        <option value="Pinse 2019">Pinse 2019</option>
+        <option value="Veke 28">Veke 28</option>
+        <option value="Veke 29">Veke 29</option>
+      </select>
+      <div id="display">
+
+      </div>
+   </div>
+    <footer>
+      
+    </footer>
+  </div>
+</body>
+
+</html>
+
+<script src="data.js"></script>
+<script>
+  var seasons = document.getElementById('seasons');
+  var main = document.getElementById('main');
+  var display = document.getElementById('display');
+  var selected = seasons.childNodes[1].value;
+  var firstOpen = true;
+  
+  function update() {
+    if(firstOpen) {
+      firstOpen = false;
+      return 0;
+    }
+    display.innerHTML = "";
+
+    var id = occupation.findIndex(period => period.time == seasons.value);
+    for (let i = 0; i < occupation[id].free.length; i++) {
+      var div = document.createElement('div');
+      var img = document.createElement('img');
+      var h3 = document.createElement('h3');
+      var btn = document.createElement('button');
+      h3.innerHTML = occupation[id].free[i];
+      button.addEventListener('click', )
+      img.src = `src/${occupation[id].free[i]}.jpg`;
+      div.appendChild(h3);
+      div.appendChild(img);
+      display.appendChild(div);
+    }
+  }
+  update();
+
+  seasons.onchange = update;
+</script>

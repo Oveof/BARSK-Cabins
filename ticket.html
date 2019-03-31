@@ -22,11 +22,17 @@
     </header>
     <div id="main">
       <div id="buttons">
-        <button data-price="440" id="adult">Voksen</button>
-        <button data-price="280" id="child">Barn</button>
+        <h3>Trykk på voksen eller barn for å legge til ein person</h3>
+        <div id="wrapper-buttons">
+          <button data-price="440" id="adult">Voksen</button>
+          <button data-price="280" id="child">Barn</button>
+        </div>
       </div>
       <div id="people"></div>
-      <div id="status"></div>
+      <div id="wrapper-status">
+        <div id="status"></div>
+        <p id="result"></p>
+      </div>
     </div>
     <footer>
       Ove Oftedal
@@ -86,6 +92,7 @@
   
   var people = document.getElementById('people');
   var orderStatus = document.getElementById('status');
+  var result = document.getElementById('result'); 
   var total
   var order = [];
   var currentID = 0;
@@ -175,6 +182,7 @@
           tr.appendChild(td);
           if (property == "price") {
             total += order[row][property]
+            result.innerHTML = total;
           }
         }
       }

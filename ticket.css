@@ -19,10 +19,16 @@
 
 #buttons {
     grid-column: 1 / 13;
-    grid-row: 1;
+    grid-row: auto;
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+#wrapper-buttons {
     display: flex;
     justify-content: center;
 }
+
 
 #people {
     grid-column: 1 / 10;
