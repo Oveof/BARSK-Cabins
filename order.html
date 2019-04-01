@@ -56,6 +56,21 @@
     update();
 
   }
+  function displayCabinInfo(target, name) {
+    var id = cabins.findIndex(cabin => cabin.name == name);
+    var tbody = document.createElement('table');
+    tbody.innerHTML = '<tr><th>Hyttenavn</th><th>Senger</th><th>Standard</th><th>Sauna</th><th>Pris</th></tr>'
+    tr = document.createElement('tr');
+    for (var property in cabins[id]) {
+      if (property != 'images') {
+        var td = document.createElement('td');
+        td.appendChild(document.createTextNode(`${cabins[id][property]}`));
+        tr.appendChild(td);
+      }
+    }
+    tbody.appendChild(tr);
+    target.appendChild(tbody);
+  }
   
   function update() {
     display.innerHTML = "";
@@ -74,6 +89,7 @@
         div.appendChild(h3);
         div.appendChild(img);
         div.appendChild(btn);
+        displayCabinInfo(div, btn.id);
         display.appendChild(div);
       }
     }

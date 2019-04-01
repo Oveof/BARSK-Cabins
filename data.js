@@ -32,6 +32,7 @@ var cabins = [
         "images": 3
     }
 ];
+
 var occupation = [
     {
         "time": "Påske 2019",

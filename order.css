@@ -2,3 +2,10 @@
     max-height: 130px;
     width: auto;
 }
+#display div > * {
+    display: block;
+    margin-bottom: 1.5vh;
+}
+#display div {
+    box
+}
