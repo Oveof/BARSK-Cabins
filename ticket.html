@@ -91,16 +91,16 @@
     }
   }
   
-  var people = document.getElementById('people');
-  var orderStatus = document.getElementById('status');
-  var result = document.getElementById('result'); 
+  const people = document.getElementById('people');
+  const orderStatus = document.getElementById('status');
+  const result = document.getElementById('result'); 
   var total
   var order = [];
   var currentID = 0;
   
   
-  var adult = document.getElementById('adult');
-  var child = document.getElementById('child');
+  const adult = document.getElementById('adult');
+  const child = document.getElementById('child');
   var adultPrice = Number(adult.getAttribute("data-price"));
   var childPrice = Number(child.getAttribute("data-price"));
   adult.onclick = addToOrder;
