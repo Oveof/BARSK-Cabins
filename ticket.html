@@ -165,6 +165,14 @@
     minus.addEventListener("click", editDays);
     currentID++
   }
+  function empty() {
+    for (let i = 0; i < order.length; i++) {
+      if (order[i] != null) {
+        return 0;
+      }
+    }
+    return 1;
+  }
   
   //Update order
   var tbody = document.createElement('table');
@@ -188,6 +196,9 @@
       tbody.appendChild(tr)
     }
     orderStatus.appendChild(tbody);
+    if (empty()) {
+      result.innerHTML = "0";
+    }
   }
 
 

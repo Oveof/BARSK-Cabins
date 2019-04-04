@@ -1,11 +1,29 @@
 #display div img {
-    max-height: 130px;
+    max-height: 160px;
     width: auto;
 }
 #display div > * {
     display: block;
-    margin-bottom: 1.5vh;
+    margin: 1.5vh
 }
 #display div {
-    box
+    margin-top: 1.5vh;
+    /*box-shadow: 18px 0px 17px -1px rgba(0, 0, 0, 0.1);*/
+    box-shadow: -5px 0px 17px -1px rgba(0, 0, 0, 0.1);
+}
+
+#display div button {
+    margin-left: 70%;
+    margin-bottom: 50px;
+    border: none;
+    background-color: #175ac6;
+    height: 5vh;
+    color: white;
+    cursor: pointer;
+    width: 30%;
+    transition: 500ms;
+    transition-timing-function: cubic-bezier(0, .99, .93, .73)
+}
+#display div button:hover {
+    background-color: #013891
 }

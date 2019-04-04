@@ -32,6 +32,10 @@
           <area id="Granstua" shape="rect" coords="(650, 215, 825, 360)">
           <area id="Granhaug" shape="rect" coords="(826, 212, 968 , 326)">
         </map>
+        <button id="modal-button">Se hyttefilmen her!</button>
+        <div id="modal-wrapper">
+          <video src="src/hyttetur2.mp4" controls width="320" height="180"></video>
+        </div>
       </div>
       <div id="display">
       </div>
@@ -63,6 +67,8 @@
   granbo.addEventListener('click', displayCabin);
   granstua.addEventListener('click', displayCabin);
   granhaug.addEventListener('click', displayCabin);
+
+  
 
   
   var selectOpen = false;
@@ -167,5 +173,19 @@
   granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`;
   granhaug.coords = `(${826/1280*mapWidth}, ${212/720*mapHeight}, ${968/1280*mapWidth}, ${326/720*mapHeight})`;
  
-  
+
+var modalButton = document.getElementById('modal-button');
+var modal = document.getElementById('modal-wrapper');
+var modalOpen = false;
+
+modalButton.onclick = function() {
+  modal.style.display = "flex";
+}
+
+modal.onclick = function(evt) {
+  if (evt.target === modal) {
+    modal.style.display = "none";
+  }
+}
+
 </script>

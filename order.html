@@ -48,6 +48,7 @@
   var main = document.getElementById('main');
   var display = document.getElementById('display');
   var selected = seasons.childNodes[1].value;
+  var text = document.createTextNode('asdasdasdasd')
 
   function order() {
     var name = this.id;
@@ -88,8 +89,8 @@
         img.src = `src/${occupation[id].free[i]}.jpg`;
         div.appendChild(h3);
         div.appendChild(img);
-        div.appendChild(btn);
         displayCabinInfo(div, btn.id);
+        div.appendChild(btn);
         display.appendChild(div);
       }
     }
