@@ -181,10 +181,10 @@
     tbody.innerHTML = "<tr><th>Type</th><th>Pris</th><th>Dager</th><th>Avslag</th></tr>"
     //Double for-loop, one for the array of objects, the other for going through the object properties
     for (let row = 0; row <= order.length; row++) {
-      var tr = document.createElement('tr');
+      let tr = document.createElement('tr');
       for (var property in order[row]) {
         if (property == "type" || property == "price" || property == "days" || property == "discount") {
-          var td = document.createElement('td');
+          let td = document.createElement('td');
           td.appendChild(document.createTextNode(order[row][property]));
           tr.appendChild(td);
             if (property == "price") {
