@@ -54,19 +54,29 @@
 
 <script>
 
-  var cabinMap = document.getElementById('cabins');
-  var grantoppen = document.getElementById('Grantoppen');
-  var granbo = document.getElementById('Granbo');
-  var granstua = document.getElementById('Granstua');
-  var granhaug = document.getElementById('Granhaug');
-  var display = document.getElementById('display');
-  var displayTable = document.getElementById('displayTable');
-  var gallery = document.getElementById('gallery');
-  var wrapper = document.getElementById('wrapper');
-  grantoppen.addEventListener('click', displayCabin);
-  granbo.addEventListener('click', displayCabin);
-  granstua.addEventListener('click', displayCabin);
-  granhaug.addEventListener('click', displayCabin);
+  const cabinMap = document.getElementById('cabins');
+  const grantoppen = document.getElementById('Grantoppen');
+  const granbo = document.getElementById('Granbo');
+  const granstua = document.getElementById('Granstua');
+  const granhaug = document.getElementById('Granhaug');
+  const display = document.getElementById('display');
+  const displayTable = document.getElementById('displayTable');
+  const gallery = document.getElementById('gallery');
+  const wrapper = document.getElementById('wrapper');
+
+  function addCabinEvent() {
+    grantoppen.addEventListener('click', displayCabin);
+    granbo.addEventListener('click', displayCabin);
+    granstua.addEventListener('click', displayCabin);
+    granhaug.addEventListener('click', displayCabin);
+  }
+  function removeCabinEvent() {
+    grantoppen.removeEventListener('click', displayCabin);
+    granbo.removeEventListener('click', displayCabin);
+    granstua.removeEventListener('click', displayCabin);
+    granhaug.removeEventListener('click', displayCabin);
+  }
+  addCabinEvent();
 
   
 
@@ -96,12 +106,14 @@
       openImage(this);
       picture.style.opacity = 1.0;
       selectOpen = true;
+      removeCabinEvent();
       return 0;
     }
     if(selectOpen && currentDisplay != this.id) {
       console.log("hallo")
       gallery.removeChild(picture);
       openImage(this);
+      removeCabinEvent();
       selectOpen = true;
       return 0;
     }
@@ -109,6 +121,7 @@
       cabinMap.style.opacity = 1;
       gallery.removeChild(picture);
       selectOpen = false;
+      addCabinEvent();
     }
   }
 

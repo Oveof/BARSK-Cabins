@@ -187,10 +187,10 @@
           var td = document.createElement('td');
           td.appendChild(document.createTextNode(order[row][property]));
           tr.appendChild(td);
-          if (property == "price") {
-            total += order[row][property]
-            result.innerHTML = total;
-          }
+            if (property == "price") {
+              total += order[row][property]
+              result.innerHTML = total;
+            }
         }
       }
       tbody.appendChild(tr)
