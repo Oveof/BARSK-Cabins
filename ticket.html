@@ -43,6 +43,8 @@
 </html>
 
 <script>
+  //Class for creating an object for each order, with methods for adding and removing days
+  //Also takes into consideration discounts
   class Person {
     constructor(type, price, days) {
       this.type = type;
@@ -57,6 +59,9 @@
         this.limit = 900;
       }
     }
+    //The methods are using multiple properties,
+    //one for keeping the real price, and another as a display
+    //price. Uses the difference betweeen the two to calculate discount
     addDay() {
       this.days++;
       this.price += this.default;
@@ -105,8 +110,6 @@
   adult.onclick = addToOrder;
   child.onclick = addToOrder;
 
-  var adultLimit = 1500;
-  var childLimit = 900
   var current = adultPrice;
   
   //Function for ordering for a new person, information is stored as an object and passed to the array "order"
@@ -120,7 +123,7 @@
   }
 
 
-
+  //Gets run when plus or minus for an order is clicked
   function editDays() {
     var string = this.parentNode.id
     string = string.split("-");
@@ -133,7 +136,6 @@
       console.log(this.id)
       order[id].removeDay();
       if (order[id].days <= 0) {
-        //order.splice(id, 1);
         order[id] = null;
         this.parentNode.parentNode.removeChild(this.parentNode)
 
@@ -142,7 +144,8 @@
     updateOrder()
   }
 
-
+  //Adds the HTML elements necessary for an order.
+  //First a div, and then adding a plus and minus div for clicking
   function addEditor(type) {
     var plus = document.createElement('p');
     var minus = document.createElement('p');
@@ -164,6 +167,7 @@
     minus.addEventListener("click", editDays);
     currentID++
   }
+  //Check if order is empty, and return a boolean.
   function empty() {
     for (let i = 0; i < order.length; i++) {
       if (order[i] != null) {
@@ -173,8 +177,8 @@
     return 1;
   }
   
-  //Update order
   var tbody = document.createElement('table');
+  //Update the order, by first deleting what is in the div
   function updateOrder() {
     var total = 0;
     tbody.innerHTML = "<tr><th>Type</th><th>Pris</th><th>Dager</th><th>Avslag</th></tr>"
@@ -195,6 +199,7 @@
       tbody.appendChild(tr)
     }
     orderStatus.appendChild(tbody);
+    //Check if order is empty, and set total to 0 if it is.
     if (empty()) {
       result.innerHTML = "0";
     }
