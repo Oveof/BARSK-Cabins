@@ -64,6 +64,7 @@
   const gallery = document.getElementById('gallery');
   const wrapper = document.getElementById('wrapper');
 
+  //functions for adding and removing event listeners for the cabin map
   function addCabinEvent() {
     grantoppen.addEventListener('click', displayCabin);
     granbo.addEventListener('click', displayCabin);
@@ -84,6 +85,7 @@
   var selectOpen = false;
   var currentDisplay;
 
+  //Opens the specified image, with the parameter being the image node
   function openImage(node) {
     cabinMap.style.opacity = 0.5;
     picture = node.cloneNode(true);
@@ -99,7 +101,9 @@
     currentDisplay = node.id;
     return 0;
   }
-
+  //Selects the specified image that was clicked,
+  //also handles logic if an image is already opened and skipping just closing the image
+  //and instead closes the previous one AND opens the new one
   function selectImage() {
     if (!selectOpen) {
       openImage(this);
@@ -126,6 +130,10 @@
 
   var liveGallery = [];
 
+  //Loads all the images for the specific cabin,
+  //with the naming scheme consisting of the cabin name + number +jpg in src/
+  //Also adds all the image nodes in the liveGallery array for increased performance,
+  //instead of running querySelectorAll.
   function loadImages(name, amount) {
     //remove previous event listeners
     for (let i = 0; i < liveGallery.length; i++) {
@@ -151,6 +159,8 @@
     }
   }
 
+  //Displays the specific cabin information, scrolls down to it,
+  //ands calls the loadImages() function
   function displayCabin() {
     //Arrow function to find the specific index
     display.innerHTML = "";
@@ -174,12 +184,10 @@
     }, 50) //6ms at minimum, a bit more for slower machines
   }
 
-  //Gallery functionality
-  
-
-  //
   var mapHeight = cabinMap.height;
   var mapWidth = cabinMap.width;
+  //Uses the percentage for where the images are in the image,
+  //and multiplies it with the cabin map dimensions.
   grantoppen.coords = `(${150/1280*mapWidth}, ${245/720*mapHeight}, ${445/1280*mapWidth}, ${433/720*mapHeight})`;2.
   granbo.coords = `(${478/1280*mapWidth}, ${147/720*mapHeight}, ${647/1280*mapWidth}, ${275/720*mapHeight})`;
   granstua.coords = `(${650/1280*mapWidth}, ${215/720*mapHeight}, ${825/1280*mapWidth}, ${360/720*mapHeight})`;

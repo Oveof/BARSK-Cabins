@@ -48,6 +48,8 @@
   const selected = seasons.childNodes[1].value;
   const text = document.createTextNode('asdasdasdasd')
 
+  //Finds the specified cabin in the specific period, and the removing it
+  //Then update the display
   function order() {
     var name = this.id;
     var freeId = occupation[id].free.findIndex(cabin => cabin == name)
@@ -56,6 +58,7 @@
     update();
 
   }
+  //Creates a table for the information for the specific cabin
   function displayCabinInfo(target, name) {
     var id = cabins.findIndex(cabin => cabin.name == name);
     var tbody = document.createElement('table');
@@ -71,7 +74,8 @@
     tbody.appendChild(tr);
     target.appendChild(tbody);
   }
-  
+  //Updates the display with what is in occupation right when its run,
+  //and gives an error if there is no cabins left.
   function update() {
     display.innerHTML = "";
     id = occupation.findIndex(period => period.time == seasons.value);

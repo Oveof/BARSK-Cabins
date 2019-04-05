@@ -115,6 +115,7 @@
   //Function for ordering for a new person, information is stored as an object and passed to the array "order"
   function addToOrder() {
     var price = Number(this.getAttribute("data-price"));
+    //Creates order object
     person = new Person(this.innerHTML, price, 1);
     order[currentID] = person
     console.log(person);
