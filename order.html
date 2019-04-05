@@ -53,6 +53,7 @@
     var name = this.id;
     var freeId = occupation[id].free.findIndex(cabin => cabin == name)
     occupation[id].free.splice(freeId, 1);
+    alert(`Hytten ${name} er bestilt!`)
     update();
 
   }

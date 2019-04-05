@@ -87,7 +87,6 @@
   function openImage(node) {
     cabinMap.style.opacity = 0.5;
     picture = node.cloneNode(true);
-    console.log(picture)
     picture.addEventListener('click', selectImage);
     gallery.appendChild(picture);
     picture.style.position = "absolute";
@@ -109,8 +108,8 @@
       removeCabinEvent();
       return 0;
     }
+    console.log(currentDisplay + " " + this.id)
     if(selectOpen && currentDisplay != this.id) {
-      console.log("hallo")
       gallery.removeChild(picture);
       openImage(this);
       removeCabinEvent();
@@ -137,7 +136,7 @@
     var imageName = name;
     for (let i = 1; i < amount + 1; i++) {
       var img = document.createElement('img');
-      img.id = imageName;
+      img.id = imageName + i;
       imageName += i;
       img.src = `src/${imageName}.jpg`;
       img.className = 'galleryImage'
