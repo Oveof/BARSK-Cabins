@@ -22,11 +22,6 @@
   </header>
     <div id="main">
       <select id="seasons">
-        <option selected="selected" disabled>Velg tidsperiode</option>
-        <option value="Påske 2019">Påske 2019</option>
-        <option value="Pinse 2019">Pinse 2019</option>
-        <option value="Veke 28">Veke 28</option>
-        <option value="Veke 29">Veke 29</option>
       </select>
       
       <div id="display">
@@ -45,9 +40,18 @@
 <script>
   const seasons = document.getElementById('seasons');
   const display = document.getElementById('display');
+  
+  //Adds select menu content
+  seasons.innerHTML = "";
+  seasons.innerHTML = ` <option selected="selected" disabled>Velg tidsperiode</option>`
+  for (let i = 0; i < occupation.length; i++) {
+    let option = document.createElement('option');
+    option.value = occupation[i].time;
+    option.innerHTML = occupation[i].time;
+    seasons.appendChild(option);
+  }
   const selected = seasons.childNodes[1].value;
-  const text = document.createTextNode('asdasdasdasd')
-
+  //TODO:FIX
   //Finds the specified cabin in the specific period, and the removing it
   //Then update the display
   function order() {
