@@ -27,6 +27,7 @@ header {
 #main {
     grid-column: 2 / 12;
     grid-row: 2;
+    text-align: center;
 }
 footer {
     grid-column: 2 / 11;
